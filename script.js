@@ -1,5 +1,5 @@
 var timeEl = document.querySelector(".half");
-// var mainEl = document.getElementById(".half");
+
 
 var secondsLeft = 60;
 
@@ -14,7 +14,7 @@ function setTime() {
       clearInterval(timerInterval);
       location.reload()
     }
-    if (currentQuestion === 6) {clearInterval(timerInterval)}
+    if (currentQuestion === 6) { clearInterval(timerInterval) }
 
   }, 1000);
 }
@@ -51,11 +51,10 @@ var numberOfAnswers = possibleAnswers1[0].length;
 console.log(numberOfAnswers + ", " + numberOfQuestions + ", " + correctAnswers1);
 var initials;
 
-// quizTheMorningAfter = ["All Done!", ];
 listItems = ["Your final score is", "Enter Initials: "];
 
 var currentQuestion = -1;
-
+// function callQuestion displays 8 consecutive views
 function callQuestion() {
   currentQuestion++;
   document.getElementById('question').innerHTML = "";
@@ -65,13 +64,13 @@ function callQuestion() {
   document.getElementById('question').appendChild(hTag);
   hTag.setAttribute("style", "width:80%")
   console.log(currentQuestion + " headline")
-  
-  if(currentQuestion === 0) { 
-    hTag.setAttribute("style", "text-align: center");
+
+  if (currentQuestion === 0) { // this one displays start of the quiz. Note that text is aligned differently
+    hTag.setAttribute("style", "text-align: center; width: 80%;");
     var pTag0 = document.createElement("p");
-    pTag0.textContent = startContent; 
+    pTag0.textContent = startContent;
     pTag0.setAttribute("class", "list1");
-    pTag0.setAttribute("style", "text-align: center");
+    pTag0.setAttribute("style", "text-align: center; width: 80%");
     document.getElementById('question').appendChild(pTag0);
     var startButton = document.createElement("button");
     startButton.setAttribute("class", "button-style");
@@ -81,202 +80,149 @@ function callQuestion() {
     document.getElementById('question').appendChild(startButton);
 
     var startButton = document.querySelector(".button-style"); // for some reason querySelector("#submit") did not work
-  startButton.addEventListener("click", startQuiz);
+    startButton.addEventListener("click", startQuiz);
 
-  function startQuiz (event) {
-   // console.log(event.currentTarget + " " + currentQuestion);
-   
-   callQuestion();
-  };
-}; // end if
+    function startQuiz(event) {
 
- if (currentQuestion < 6 && currentQuestion > 0) {
-    // for (i = 0; i < 4; i++) {
-      
-      // console.log(buttonId)
-      if (currentQuestion === 1) { 
-         }
+      callQuestion();
+    };
+  }; // end if
 
-    for (i = 0; i < possibleAnswers1[0].length; i++) { 
+  if (currentQuestion < 6 && currentQuestion > 0) { // those values display 5 questions
+
+    if (currentQuestion === 1) {
+    }
+
+    for (i = 0; i < possibleAnswers1[0].length; i++) {
 
       var buttonId = "button".concat(i);
-    var divTag = document.createElement("div");
-    
-    var buttonTag = document.createElement("button");
-    buttonTag.textContent = possibleAnswers1[currentQuestion-1][i];
-    buttonTag.setAttribute("class", "button-style")
-    buttonTag.setAttribute("id", buttonId)
-    document.getElementById('question').appendChild(divTag);
-    divTag.appendChild(buttonTag);
-  }; // end for loop
+      var divTag = document.createElement("div");
 
-  var firstButton = document.querySelector("#button0");
-  var secondButton = document.querySelector("#button1");
-  var thirdButton = document.querySelector("#button2");
-  var forthButton = document.querySelector("#button3");
+      var buttonTag = document.createElement("button");
+      buttonTag.textContent = possibleAnswers1[currentQuestion - 1][i];
+      buttonTag.setAttribute("class", "button-style")
+      buttonTag.setAttribute("id", buttonId)
+      document.getElementById('question').appendChild(divTag);
+      divTag.appendChild(buttonTag);
+    }; // end for loop
 
-  firstButton.addEventListener("click", enterAnswer);
-  secondButton.addEventListener("click", enterAnswer);
-  thirdButton.addEventListener("click", enterAnswer);
-  forthButton.addEventListener("click", enterAnswer);
+    var firstButton = document.querySelector("#button0");
+    var secondButton = document.querySelector("#button1");
+    var thirdButton = document.querySelector("#button2");
+    var forthButton = document.querySelector("#button3");
 
-  console.log(currentQuestion + " " + correctAnswers1 + " " + buttonId + "before enterAnswer");
+    firstButton.addEventListener("click", enterAnswer);
+    secondButton.addEventListener("click", enterAnswer);
+    thirdButton.addEventListener("click", enterAnswer);
+    forthButton.addEventListener("click", enterAnswer);
 
-  function enterAnswer(event) {
-    console.log(event.currentTarget);
-    tempArray = event.currentTarget.textContent.split(".");
-    tempValue = tempArray[0] - 1;
-    //console.log(tempValue + " " + currentQuestion + " " + );
-    var lineBreak = document.createElement("HR");
-    document.getElementById('question').appendChild(lineBreak);
-    lineBreak.setAttribute("style", "background-color: grey; width: 75%; height: 2px; margin-left: 10%")
-    var answerTag = document.createElement("p");
-    answerTag.setAttribute("class", "answer");
-    document.getElementById('question').appendChild(answerTag);
-   // console.log("current inside loop" + currentQuestion + "tempValue " + tempValue + "correct Answer" + correctAnswers1[currentQuestion])
-    if (correctAnswers1[currentQuestion] == tempValue) {
-      answerTag.textContent = "Correct!"
-    }
-    else {
-      answerTag.textContent = "Wrong!"
-      secondsLeft = secondsLeft - 10;
-    }
-    
-    setTimeout(callQuestion, 700)
-  }; //end function enterAnswer
-}; // end if currentQuestion < 5 statement
-secondsLeft1 = secondsLeft
-  if (currentQuestion === 6) {
-  var pTag0 = document.createElement("p");
-  pTag0.textContent = listItems[0]  + ' ' + secondsLeft1;
-  pTag0.setAttribute("class", "list1");
-  document.getElementById('question').appendChild(pTag0);
-  var pTag1 = document.createElement("p");
-  pTag1.textContent = listItems[1];
-  pTag1.setAttribute("class", "list1")
-  pTag1.setAttribute("id", "parTag1")
-  document.getElementById('question').appendChild(pTag1);
-  var input1 = document.createElement("input");
-  input1.setAttribute("class", "input")
-  document.getElementById('parTag1').appendChild(input1);
-  var submitButton = document.createElement("button");
-  submitButton.setAttribute("class", "button-style");
-  submitButton.setAttribute("id", "submit");
-  submitButton.setAttribute("style", "left: 2%");
-  submitButton.textContent = "Submit";
-  document.getElementById('parTag1').appendChild(submitButton);
+    console.log(currentQuestion + " " + correctAnswers1 + " " + buttonId + "before enterAnswer");
 
-  var enterInitials = document.querySelector(".input");
-  // var arrayOfInitials = [] 
-  var elements = [];
-  input1.addEventListener('keydown', function(event) {
- // console.log(event.currentTarget + " " + currentQuestion);
- var key1 = event.key.toUpperCase();
- var alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
- // input1.textContent.append(key);
- if (alphabet.includes(key1)) {elements.textContent += event.key;
- 
- initials = elements.textContent.substring(9)
-  console.log(elements.textContent + " " + typeof(elements.textContent) + " " + initials + " " + secondsLeft);}
-  
-  // arrayOfInitials.push(initials);
-  // arrayOfInitials.splice(arrayOfInitials.length-1, arrayOfInitials.length-1)
-  // console.log(arrayOfInitials)
- });
-currentQuestion === 8;
-console.log(initials + "inside")
-var submitButton = document.querySelector(".button-style"); // for some reason querySelector("#submit") did not work
-submitButton.addEventListener("click", enterScore);
+    function enterAnswer(event) { // this function is to determine which button was clicked, then it determines if answer was correct or wrong
+      console.log(event.currentTarget);
+      tempArray = event.currentTarget.textContent.split(".");
+      tempValue = tempArray[0] - 1;
+      var lineBreak = document.createElement("HR");
+      document.getElementById('question').appendChild(lineBreak);
+      lineBreak.setAttribute("style", "background-color: grey; width: 75%; height: 2px; margin-left: 10%")
+      var answerTag = document.createElement("p");
+      answerTag.setAttribute("class", "answer");
+      document.getElementById('question').appendChild(answerTag);
+      // console.log("current inside loop" + currentQuestion + "tempValue " + tempValue + "correct Answer" + correctAnswers1[currentQuestion])
+      if (correctAnswers1[currentQuestion] == tempValue) {
+        answerTag.textContent = "Correct!"
+      }
+      else {
+        answerTag.textContent = "Wrong!"
+        secondsLeft = secondsLeft - 10;
+      }
 
-function enterScore (event) {
-  console.log(currentQuestion + " enterScore") ;
-  if (currentQuestion === 6) {currentQuestion = 8};
-  currentQuestion--;
-   document.getElementById('question').innerHTML = "";
-   
-   clearInterval();
-   callQuestion();
-   var hTag = document.createElement("h1");
-hTag.textContent = questions1[7];
-hTag.setAttribute("class", "headline")
-document.getElementById('question').appendChild(hTag);
-pTag0.textContent = '1. ' + initials + ' - ' + secondsLeft1;
-pTag0.setAttribute("class", "list2")
-document.getElementById('question').appendChild(pTag0);
-var pTag1 = document.createElement("p");
-pTag1.textContent = '';
-pTag1.setAttribute("class", "list1")
-pTag1.setAttribute("id", "parTag1")
-pTag1.setAttribute("style", "left: 7%")
-document.getElementById('question').appendChild(pTag1);
+      setTimeout(callQuestion, 700)
+    }; //end function enterAnswer
+  }; // end if currentQuestion < 5 statement
 
-var submitButton = document.createElement("button");
-submitButton.setAttribute("class", "button-style");
-submitButton.setAttribute("id", "submit");
-submitButton.setAttribute("style", "left: 2%");
-submitButton.textContent = "Clear Highscores";
-document.getElementById('parTag1').appendChild(submitButton);
+  secondsLeft1 = secondsLeft
+  if (secondsLeft1 < 0) { location.reload() };
+  if (currentQuestion === 6) { // this one displays my score then I can enter my initials
+    var pTag0 = document.createElement("p");
+    pTag0.textContent = listItems[0] + ' ' + secondsLeft1;
+    pTag0.setAttribute("class", "list1");
+    document.getElementById('question').appendChild(pTag0);
+    var pTag1 = document.createElement("p");
+    pTag1.textContent = listItems[1];
+    pTag1.setAttribute("class", "list1")
+    pTag1.setAttribute("id", "parTag1")
+    document.getElementById('question').appendChild(pTag1);
+    var input1 = document.createElement("input");
+    input1.setAttribute("class", "input")
+    document.getElementById('parTag1').appendChild(input1);
+    var submitButton = document.createElement("button");
+    submitButton.setAttribute("class", "button-style");
+    submitButton.setAttribute("id", "submit");
+    submitButton.setAttribute("style", "left: 2%");
+    submitButton.textContent = "Submit";
+    document.getElementById('parTag1').appendChild(submitButton);
 
-var submitButton = document.createElement("button");
-submitButton.setAttribute("class", "button-style");
-submitButton.setAttribute("id", "submit");
-submitButton.setAttribute("style", "left: 2%");
-submitButton.textContent = "Go Back";
-document.getElementById('parTag1').appendChild(submitButton);
-submitButton.addEventListener("click", reload1); 
-function reload1(event) {location.reload()};  
+    var enterInitials = document.querySelector(".input");
+    var elements = [];
+    input1.addEventListener('keydown', function (event) {
+      var key1 = event.key.toUpperCase();
+      var alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+      if (alphabet.includes(key1)) {
+        elements.textContent += event.key;
 
- };
+        initials = elements.textContent.substring(9)
+        console.log(elements.textContent + " " + typeof (elements.textContent) + " " + initials + " " + secondsLeft);
+      }
 
-}; // end if currentQuestion === 6 
+    });
+    currentQuestion === 8;
+    console.log(initials + "inside")
+    var submitButton = document.querySelector(".button-style"); // for some reason querySelector("#submit") did not work
+    submitButton.addEventListener("click", enterScore);
 
+    function enterScore(event) { // this one displays last page
+      console.log(currentQuestion + " enterScore");
+      if (currentQuestion === 6) { currentQuestion = 8 };
+      currentQuestion--;
+      document.getElementById('question').innerHTML = "";
 
-  
+      clearInterval();
+      callQuestion();
+      var hTag = document.createElement("h1");
+      hTag.textContent = questions1[7];
+      hTag.setAttribute("class", "headline")
+      document.getElementById('question').appendChild(hTag);
+      pTag0.textContent = '1. ' + initials + ' - ' + secondsLeft1;
+      pTag0.setAttribute("class", "list2")
+      document.getElementById('question').appendChild(pTag0);
+      var pTag1 = document.createElement("p");
+      pTag1.textContent = '';
+      pTag1.setAttribute("class", "list1")
+      pTag1.setAttribute("id", "parTag1")
+      pTag1.setAttribute("style", "left: 7%")
+      document.getElementById('question').appendChild(pTag1);
 
+      var submitButton = document.createElement("button");
+      submitButton.setAttribute("class", "button-style");
+      submitButton.setAttribute("id", "submit");
+      submitButton.setAttribute("style", "left: 2%");
+      submitButton.textContent = "Clear Highscores";
+      document.getElementById('parTag1').appendChild(submitButton);
 
- 
+      var submitButton = document.createElement("button");
+      submitButton.setAttribute("class", "button-style");
+      submitButton.setAttribute("id", "submit");
+      submitButton.setAttribute("style", "left: 2%");
+      submitButton.textContent = "Go Back";
+      document.getElementById('parTag1').appendChild(submitButton);
+      submitButton.addEventListener("click", reload1);
+      function reload1(event) { location.reload() };
 
-// var typeface;
+    };
 
-// Keydown event
-// textAreaEl.addEventListener('keydown', function (event) {
-  // Access value of pressed key with key property
+  }; // end if currentQuestion === 6 
 
-//});
-
-
-    // document.getElementById('tempo').appendChild(h1El);
-  
-  var inputAreaEl = document.querySelector('.input');
-
- // var enterInitials = document.querySelector("#input");
-// localStorage.setItem("initials", initials);
-
-// var initials = localStorage.getItem("initials");
-// enterInitials.textContent = initials;
-// submitButton.addEventListener("click",initials);
-// var enterInitials = localStorage.getItem("initials");
-// callQuestion++;
- 
 } // end callQuestion
 
 callQuestion();
-
-// function lastSlide (current) {
- // currentQuestion === 7;
-// if (currentQuestion === 7) {
- // var list2 = document.createElement("li");
-//  list2.textContent = "Score";
-//  document.getElementById('question').appendChild(list2);
- // }; // end if currentQuestion === 7
-// }
-// lastSlide() //
-
-// Action to be performed on click store in named function
-function showResponse(event) {
-  // Prevent default action
-  event.preventDefault();
-  console.log(event);
-  var response = "Thank you for your submission " + nameInput.value + "! We will reach out to you at " + emailInput.value + ".";
-  submissionResponseEl.textContent = response;
-}
